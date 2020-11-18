@@ -1,9 +1,19 @@
-# Copyright (c) Andres Vidal.
+# Original copyright (c) Andres Vidal.
+# Modified by: Tony Hirst
 # Distributed under the terms of the MIT License.
 FROM python:3.8
 
 LABEL created_by=https://github.com/andresvidal/jupyter-armv7l
 #ARG wheelhouse=https://github.com/OpenComputingLab/jupyter-armv7l/raw/master
+
+#We can pass variables into the build process via --build-arg variables
+#We name them inside the Dockerfile using ARG, optionally setting a default value
+#ARG RELEASE=3.1
+ARG JUPYTER_TOKEN=3.3
+
+#ENV vars are environment variables that get baked into the image
+#We can pass an ARG value into a final image by assigning it to an ENV variable
+ENV JUPYTER_TOKEN=$JUPYTER_TOKEN
 
 # Install all OS dependencies for fully functional notebook server
 # https://github.com/jupyter/docker-stacks/blob/master/minimal-notebook/Dockerfile
@@ -45,10 +55,13 @@ COPY ./wheelhouse/ ./wheelhouse/
 RUN echo kiwisolver matplotlib numpy scipy pandas pyzmq | xargs -n 1 pip install --find-links=./wheelhouse && rm -r ./wheelhouse
 
 RUN pip install --upgrade jupyter
+RUN mkdir /notebooks
 
-RUN jupyter notebook --generate-config
+#RUN jupyter notebook --generate-config
 
-COPY .jupyter/ .jupyter/
+COPY .jupyter/ /notebooks/.jupyter/
+RUN echo "c.NotebookApp.token='$JUPYTER_TOKEN'" >> .jupyter/jupyter_notebook_config.py; fi
+
 WORKDIR /notebooks
 EXPOSE 8888
 ENTRYPOINT ["jupyter", "notebook", "--ip=*", "--allow-root", "--no-browser", "--port=8888"]
