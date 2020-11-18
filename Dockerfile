@@ -42,18 +42,9 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen
 
 COPY ./wheelhouse/ ./wheelhouse/
-RUN echo kiwisolver matplotlib numpy scipy pandas pyzmq | xargs -n 1 pip install --no-index --find-links=./wheelhouse && rm -r ./wheelhouse
+RUN echo kiwisolver matplotlib numpy scipy pandas pyzmq | xargs -n 1 pip install --find-links=./wheelhouse && rm -r ./wheelhouse
 
-
-# If we can't find it locally
-RUN pip install \
-    kiwisolver \
-    matplotlib \
-    numpy \
-    scipy \
-    pandas \
-    pyzmq \
-    --upgrade jupyter
+RUN pip install --upgrade jupyter
 
 RUN jupyter notebook --generate-config
 
