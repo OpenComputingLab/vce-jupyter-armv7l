@@ -50,4 +50,5 @@ RUN jupyter notebook --generate-config
 
 COPY .jupyter/ .jupyter/
 WORKDIR /notebooks
-ENTRYPOINT ["jupyter", "notebook", "--ip=*", "--allow-root", "--no-browser"]
+EXPOSE 8888
+ENTRYPOINT ["jupyter", "notebook", "--ip=*", "--allow-root", "--no-browser", "--port=8888"]
