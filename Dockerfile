@@ -9,7 +9,7 @@ LABEL created_by=https://github.com/andresvidal/jupyter-armv7l
 #We can pass variables into the build process via --build-arg variables
 #We name them inside the Dockerfile using ARG, optionally setting a default value
 #ARG RELEASE=3.1
-ARG JUPYTER_TOKEN=3.3
+ARG JUPYTER_TOKEN=letmein
 
 #ENV vars are environment variables that get baked into the image
 #We can pass an ARG value into a final image by assigning it to an ENV variable
