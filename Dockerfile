@@ -3,7 +3,7 @@
 FROM python:3.8
 
 LABEL created_by=https://github.com/andresvidal/jupyter-armv7l
-ARG=https://github.com/andresvidal/jupyter-armv7l/raw/master
+#ARG wheelhouse=https://github.com/OpenComputingLab/jupyter-armv7l/raw/master
 
 # Install all OS dependencies for fully functional notebook server
 # https://github.com/jupyter/docker-stacks/blob/master/minimal-notebook/Dockerfile
@@ -41,7 +41,9 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen
 
-RUN echo kiwisolver matplotlib numpy scipy pandas pyzmq | xargs -n 1 pip install --no-index --find-links=./wheelhouse
+COPY ./wheelhouse/ ./wheelhouse/
+RUN echo kiwisolver matplotlib numpy scipy pandas pyzmq | xargs -n 1 pip install --no-index --find-links=./wheelhouse && rm -r ./wheelhousey
+
 
 # If we can't find it locally
 RUN pip install \
