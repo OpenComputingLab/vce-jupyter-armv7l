@@ -59,8 +59,9 @@ RUN mkdir /notebooks
 
 #RUN jupyter notebook --generate-config
 
-COPY .jupyter/ /notebooks/.jupyter/
-RUN echo "c.NotebookApp.token='$JUPYTER_TOKEN'" >> /notebooks/.jupyter/jupyter_notebook_config.py
+# TO DO - need to sort out proper NB_USER
+COPY .jupyter/ /root/.jupyter/
+RUN echo "c.NotebookApp.token='$JUPYTER_TOKEN'" >> /root/.jupyter/jupyter_notebook_config.py
 
 WORKDIR /notebooks
 EXPOSE 8888
