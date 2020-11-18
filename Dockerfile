@@ -60,7 +60,7 @@ RUN mkdir /notebooks
 #RUN jupyter notebook --generate-config
 
 COPY .jupyter/ /notebooks/.jupyter/
-RUN echo "c.NotebookApp.token='$JUPYTER_TOKEN'" >> /notebooks/.jupyter/jupyter_notebook_config.py; fi
+RUN echo "c.NotebookApp.token='$JUPYTER_TOKEN'" >> /notebooks/.jupyter/jupyter_notebook_config.py
 
 WORKDIR /notebooks
 EXPOSE 8888
