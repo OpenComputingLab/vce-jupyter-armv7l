@@ -39,7 +39,7 @@ jobs:
         run: |
           docker buildx build \
             --platform linux/amd64,linux/arm/v7 \
-            -t oulocl/vce-jupyter:${GITHUB_SHA::7} \
+            -t ouvocl/vce-jupyter:${GITHUB_SHA::7} \
             .
 
       - name: Login to DockerHub
@@ -50,11 +50,11 @@ jobs:
         run: |
           docker buildx build \
             --platform linux/amd64,linux/arm/v7 \
-            -t oulocl/vce-jupyter:${GITHUB_SHA::7} \
+            -t ouvocl/vce-jupyter:${GITHUB_SHA::7} \
             . \
             --push
           docker buildx build \
             --platform linux/amd64,linux/arm/v7 \
-            -t oulocl/vce-jupyter:latest \
+            -t ouvocl/vce-jupyter:latest \
             . \
             --push
