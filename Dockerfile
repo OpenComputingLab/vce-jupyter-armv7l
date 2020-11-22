@@ -1,7 +1,7 @@
 # Original copyright (c) Andres Vidal.
 # Modified by: Tony Hirst
 # Distributed under the terms of the MIT License.
-FROM python:3.8
+FROM ouvocl/base-py38
 
 LABEL created_by=https://github.com/andresvidal/jupyter-armv7l
 #ARG wheelhouse=https://github.com/OpenComputingLab/jupyter-armv7l/raw/master
